@@ -36,6 +36,18 @@ namespace CarShowRoom
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
+            * dependency injection - total three types
+            * A. Transient- A separate instance of repository for every use
+            * B. Singleton- A single instance of repository during application lifecycle
+            * C. Scoped- A single instance of repository for each request
+            *** Repository always connect with db context as scoped
+            */
+            services.AddScoped<IMakeRepository, MakeRepository>();
+            services.AddScoped<IFeatureRepository, FeatureRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<AppDbContext>(options =>
