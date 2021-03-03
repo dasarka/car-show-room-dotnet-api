@@ -12,21 +12,21 @@ namespace CarShowRoom.Controllers
     [Route("/api/feature")]
     public class FeaturesController : ControllerBase
     {
-        private readonly AppDbContext context;
         private readonly IMapper mapper;
+        private readonly IFeatureRepository repository;
 
-        public FeaturesController(AppDbContext context, IMapper mapper)
+        public FeaturesController(IMapper mapper, IFeatureRepository repository)
         {
+            this.repository = repository;
             this.mapper = mapper;
-            this.context = context;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<FeatureResource>> GetFeatures()
+        public async Task<IEnumerable<KeyValuePairResource>> GetFeatures()
         {
-            var features = await context.Features.ToListAsync();
+            var features = await repository.GetFeatures();
 
-            return mapper.Map<List<Feature>, List<FeatureResource>>(features);
+            return mapper.Map<List<Feature>, List<KeyValuePairResource>>(features);
         }
     }
 }

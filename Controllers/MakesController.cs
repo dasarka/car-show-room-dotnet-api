@@ -12,20 +12,20 @@ namespace CarShowRoom.Controllers
     [Route("/api/make")]
     public class MakesController : ControllerBase
     {
-        private readonly AppDbContext context;
         private readonly IMapper mapper;
+        private readonly IMakeRepository repository;
 
-        public MakesController(AppDbContext context, IMapper mapper)
+        public MakesController(IMapper mapper, IMakeRepository repository)
         {
+            this.repository = repository;
             this.mapper = mapper;
-            this.context = context;
 
         }
 
         [HttpGet]
         public async Task<IEnumerable<MakeResource>> GetMakes()
         {
-            var makes = await context.Makes.Include(m => m.Models).ToListAsync();
+            var makes = await repository.GetMakes();
 
             return mapper.Map<List<Make>, List<MakeResource>>(makes);
         }
