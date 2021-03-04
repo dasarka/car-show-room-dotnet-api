@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using AutoMapper;
+using CarShowRoom.Models;
 
 namespace CarShowRoom
 {
@@ -36,6 +37,8 @@ namespace CarShowRoom
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+
             /*
             * dependency injection - total three types
             * A. Transient- A separate instance of repository for every use
