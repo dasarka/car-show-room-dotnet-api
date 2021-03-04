@@ -4,14 +4,16 @@ using CarShowRoom.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarShowRoom.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210304073133_AddPhoto")]
+    partial class AddPhoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,7 +143,7 @@ namespace CarShowRoom.Migrations
             modelBuilder.Entity("CarShowRoom.Models.Photo", b =>
                 {
                     b.HasOne("CarShowRoom.Models.Vehicle")
-                        .WithMany("Photos")
+                        .WithMany("Photo")
                         .HasForeignKey("VehicleId");
                 });
 
